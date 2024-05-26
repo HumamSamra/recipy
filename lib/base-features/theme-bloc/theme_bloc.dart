@@ -27,8 +27,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       emit(state.copyWith(
         color: Utils.textToColor(
             service.getTyped<String>(StorageKeys.primaryColor)),
-        font: service.getTyped<String>(
-                service.getTyped<String>(StorageKeys.fontFamily)) ??
+        font: service.getTyped<String>(StorageKeys.fontFamily) ??
             AppFonts.defaultFontFamily,
         themeMode: themeMode,
       ));

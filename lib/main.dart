@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipes/base-features/theme-bloc/theme_bloc.dart';
 import 'package:recipes/core/router/router.dart';
@@ -20,6 +21,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return ResponsiveSizer(
       builder: (context, orientation, screenType) => MultiBlocProvider(
         providers: [

@@ -21,6 +21,7 @@ class DefaultSubBanner extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.w),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(icon),
           Gap(2.w),

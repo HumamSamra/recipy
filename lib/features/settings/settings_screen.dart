@@ -105,13 +105,16 @@ class SettingsScreen extends StatelessWidget {
             for (var font in AppFonts.fontFamilies)
               ListTile(
                 onTap: () {
-                  context.read<ThemeBloc>().add(ThemeEvent.changeFont(
-                      font.replaceAll(' ', '_').toLowerCase()));
+                  context
+                      .read<ThemeBloc>()
+                      .add(ThemeEvent.changeFont(font.replaceAll(' ', '_')));
                 },
                 title: Text(
                   font,
                   style: TextStyle(
-                    fontWeight: currectActive == font ? FontWeight.bold : null,
+                    fontWeight: currectActive == font.replaceAll(' ', '_')
+                        ? FontWeight.bold
+                        : null,
                     fontFamily: font,
                   ),
                 ),
