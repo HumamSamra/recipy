@@ -4,6 +4,9 @@ abstract class StorageKeys {
   static const themeMode = "THEME_MODE";
   static const fontFamily = "FONT_FAMILY";
   static const primaryColor = "PRIMARY_COLOR";
+
+  //-----------! Cache !-----------//
+  static const cacheRecipes = "CACHED_RECIPES";
 }
 
 class StorageService {

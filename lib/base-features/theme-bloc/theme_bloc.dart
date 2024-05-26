@@ -6,7 +6,7 @@ import 'package:recipes/core/constants/app_colors.dart';
 import 'package:recipes/core/constants/app_fonts.dart';
 import 'package:recipes/core/local/storage_service.dart';
 import 'package:recipes/core/utils/utils.dart';
-import 'package:recipes/generated/injection/injection.dart';
+import 'package:recipes/injection.dart';
 
 part 'theme_bloc.freezed.dart';
 part 'theme_event.dart';

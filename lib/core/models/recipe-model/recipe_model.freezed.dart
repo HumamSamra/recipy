@@ -21,7 +21,7 @@ RecipeModel _$RecipeModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$RecipeModel {
   @JsonKey(name: 'idMeal')
-  int? get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'strMeal')
   String? get meal => throw _privateConstructorUsedError;
   @JsonKey(name: 'strCategory')
@@ -48,7 +48,7 @@ abstract class $RecipeModelCopyWith<$Res> {
       _$RecipeModelCopyWithImpl<$Res, RecipeModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'idMeal') int? id,
+      {@JsonKey(name: 'idMeal') String? id,
       @JsonKey(name: 'strMeal') String? meal,
       @JsonKey(name: 'strCategory') String? category,
       @JsonKey(name: 'strArea') String? area,
@@ -82,7 +82,7 @@ class _$RecipeModelCopyWithImpl<$Res, $Val extends RecipeModel>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       meal: freezed == meal
           ? _value.meal
           : meal // ignore: cast_nullable_to_non_nullable
@@ -120,7 +120,7 @@ abstract class _$$RecipeModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'idMeal') int? id,
+      {@JsonKey(name: 'idMeal') String? id,
       @JsonKey(name: 'strMeal') String? meal,
       @JsonKey(name: 'strCategory') String? category,
       @JsonKey(name: 'strArea') String? area,
@@ -152,7 +152,7 @@ class __$$RecipeModelImplCopyWithImpl<$Res>
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       meal: freezed == meal
           ? _value.meal
           : meal // ignore: cast_nullable_to_non_nullable
@@ -199,7 +199,7 @@ class _$RecipeModelImpl extends _RecipeModel {
 
   @override
   @JsonKey(name: 'idMeal')
-  final int? id;
+  final String? id;
   @override
   @JsonKey(name: 'strMeal')
   final String? meal;
@@ -263,7 +263,7 @@ class _$RecipeModelImpl extends _RecipeModel {
 
 abstract class _RecipeModel extends RecipeModel {
   const factory _RecipeModel(
-          {@JsonKey(name: 'idMeal') final int? id,
+          {@JsonKey(name: 'idMeal') final String? id,
           @JsonKey(name: 'strMeal') final String? meal,
           @JsonKey(name: 'strCategory') final String? category,
           @JsonKey(name: 'strArea') final String? area,
@@ -278,7 +278,7 @@ abstract class _RecipeModel extends RecipeModel {
 
   @override
   @JsonKey(name: 'idMeal')
-  int? get id;
+  String? get id;
   @override
   @JsonKey(name: 'strMeal')
   String? get meal;

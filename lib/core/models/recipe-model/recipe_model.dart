@@ -10,7 +10,7 @@ class RecipeModel with _$RecipeModel {
   const RecipeModel._();
 
   const factory RecipeModel({
-    @JsonKey(name: 'idMeal') int? id,
+    @JsonKey(name: 'idMeal') String? id,
     @JsonKey(name: 'strMeal') String? meal,
     @JsonKey(name: 'strCategory') String? category,
     @JsonKey(name: 'strArea') String? area,

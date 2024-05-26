@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipes/base-features/theme-bloc/theme_bloc.dart';
 import 'package:recipes/core/router/router.dart';
 import 'package:recipes/core/theme/app_theme.dart';
-import 'package:recipes/generated/injection/injection.dart';
+import 'package:recipes/features/home/view/bloc/home_bloc.dart';
+import 'package:recipes/injection.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 Future<void> main() async {
@@ -26,6 +27,10 @@ class MainApp extends StatelessWidget {
             lazy: false,
             create: (context) =>
                 getIt.get<ThemeBloc>()..add(const ThemeEvent.started()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                getIt.get<HomeBloc>()..add(const HomeEvent.started()),
           ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(

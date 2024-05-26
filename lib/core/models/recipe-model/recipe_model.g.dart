@@ -8,7 +8,7 @@ part of 'recipe_model.dart';
 
 _$RecipeModelImpl _$$RecipeModelImplFromJson(Map<String, dynamic> json) =>
     _$RecipeModelImpl(
-      id: (json['idMeal'] as num?)?.toInt(),
+      id: json['idMeal'] as String?,
       meal: json['strMeal'] as String?,
       category: json['strCategory'] as String?,
       area: json['strArea'] as String?,
