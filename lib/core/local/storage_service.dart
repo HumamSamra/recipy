@@ -66,6 +66,8 @@ class StorageService {
     }
   }
 
+  void remove(String key) => _prefs.remove(key);
+
   Future<bool> clearAsync() async {
     return await _prefs.clear();
   }

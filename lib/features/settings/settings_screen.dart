@@ -47,8 +47,8 @@ class SettingsScreen extends StatelessWidget {
       isScrollControlled: false,
       builder: (context) {
         var currectActive = context.read<ThemeBloc>().state.color;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
+        return ListView(
+          shrinkWrap: true,
           children: [
             const DefaultBanner(
               title: 'Primary Color',
@@ -95,8 +95,8 @@ class SettingsScreen extends StatelessWidget {
       isScrollControlled: false,
       builder: (context) {
         var currectActive = context.read<ThemeBloc>().state.font;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
+        return ListView(
+          shrinkWrap: true,
           children: [
             const DefaultBanner(
               title: 'Font Theme',
@@ -137,8 +137,8 @@ class SettingsScreen extends StatelessWidget {
       isScrollControlled: false,
       builder: (context) {
         var currectActive = context.read<ThemeBloc>().state.themeMode;
-        return Column(
-          mainAxisSize: MainAxisSize.min,
+        return ListView(
+          shrinkWrap: true,
           children: [
             const DefaultBanner(
               title: 'Theme Mode',

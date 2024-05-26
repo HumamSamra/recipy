@@ -51,13 +51,12 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     });
 
     on<_ChangeTheme>((event, emit) {
-      getIt.get<StorageService>().set(
-          StorageKeys.themeMode,
-          event.themeMode == ThemeMode.dark
-              ? 'DARK'
-              : event.themeMode == ThemeMode.light
-                  ? 'LIGHT'
-                  : null);
+      if (event.themeMode == ThemeMode.system) {
+        getIt.get<StorageService>().remove(StorageKeys.themeMode);
+      } else {
+        getIt.get<StorageService>().set(StorageKeys.themeMode,
+            event.themeMode == ThemeMode.dark ? 'DARK' : 'LIGHT');
+      }
       emit(state.copyWith(
         themeMode: event.themeMode,
       ));
