@@ -4,7 +4,7 @@ import 'package:recipes/features/bottom-tabs/bottom_tabs.imports.dart';
 import 'package:recipes/features/home/view/home.imports.dart';
 import 'package:recipes/features/my-recipes/view/my_recipes.imports.dart';
 import 'package:recipes/features/search/view/search.imports.dart';
-import 'package:recipes/features/settings/screen.imports.dart';
+import 'package:recipes/features/settings/settings_screen.imports.dart';
 
 part 'router.gr.dart';
 

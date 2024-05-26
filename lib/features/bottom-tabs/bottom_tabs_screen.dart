@@ -15,6 +15,13 @@ class BottomTabsScreen extends StatelessWidget {
       ],
       builder: (context, child, pageController) {
         var router = context.tabsRouter;
+
+        Color? getColor(int index) {
+          return router.activeIndex == index
+              ? Theme.of(context).colorScheme.primary
+              : null;
+        }
+
         return Scaffold(
           body: child,
           floatingActionButton: FloatingActionButton(
@@ -29,26 +36,53 @@ class BottomTabsScreen extends StatelessWidget {
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: StylishBottomBar(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+            backgroundColor: Theme.of(context).colorScheme.background,
             option: AnimatedBarOptions(
               iconStyle: IconStyle.animated,
+              padding: EdgeInsets.symmetric(vertical: 1.h),
+              barAnimation: BarAnimation.fade,
             ),
+            elevation: 60,
             items: [
               BottomBarItem(
-                icon: const Icon(Icons.home_outlined),
+                icon: Icon(
+                  Icons.home_outlined,
+                  color: getColor(0),
+                ),
                 title: const Text('Home'),
+                selectedColor: Theme.of(context).colorScheme.primary,
               ),
               BottomBarItem(
-                icon: const Icon(Icons.search),
+                icon: Icon(
+                  Icons.search,
+                  color: getColor(1),
+                ),
                 title: const Text('Search'),
+                selectedColor: Theme.of(context).colorScheme.primary,
               ),
               BottomBarItem(
-                icon: const Icon(Icons.collections_bookmark_outlined),
+                icon: Icon(
+                  Icons.collections_bookmark_outlined,
+                  color: getColor(2),
+                ),
                 title: const Text('Recipes'),
+                selectedColor: Theme.of(context).colorScheme.primary,
+                selectedIcon: Icon(
+                  Icons.collections_bookmark_outlined,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
               BottomBarItem(
-                icon: const Icon(Icons.settings),
+                icon: Icon(
+                  Icons.settings,
+                  color: getColor(3),
+                ),
                 title: const Text('Settings'),
+                selectedColor: Theme.of(context).colorScheme.primary,
+                selectedIcon: Icon(
+                  Icons.settings,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ],
             fabLocation: StylishBarFabLocation.center,

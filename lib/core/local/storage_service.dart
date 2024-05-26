@@ -2,6 +2,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class StorageKeys {
   static const themeMode = "THEME_MODE";
+  static const fontFamily = "FONT_FAMILY";
+  static const primaryColor = "PRIMARY_COLOR";
 }
 
 class StorageService {
@@ -62,5 +64,13 @@ class StorageService {
     } else {
       return _prefs.getString(key);
     }
+  }
+
+  Future<bool> clearAsync() async {
+    return await _prefs.clear();
+  }
+
+  void clear() {
+    _prefs.clear();
   }
 }

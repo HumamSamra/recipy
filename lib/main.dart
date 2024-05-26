@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipes/base-features/theme-bloc/theme_bloc.dart';
 import 'package:recipes/core/router/router.dart';
 import 'package:recipes/core/theme/app_theme.dart';
 import 'package:recipes/generated/injection/injection.dart';
@@ -18,18 +20,37 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
-      builder: (context, orientation, screenType) => MaterialApp.router(
-        title: 'Recipy',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
-        themeMode: ThemeMode.light,
-        scrollBehavior: const ScrollBehavior().copyWith(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
+      builder: (context, orientation, screenType) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            lazy: false,
+            create: (context) =>
+                getIt.get<ThemeBloc>()..add(const ThemeEvent.started()),
           ),
+        ],
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            return MaterialApp.router(
+              title: 'Recipy',
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.light(
+                color: state.color!,
+                fontFamily: state.font!,
+              ),
+              darkTheme: AppTheme.dark(
+                color: state.color!,
+                fontFamily: state.font!,
+              ),
+              themeMode: state.themeMode,
+              scrollBehavior: const ScrollBehavior().copyWith(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+              ),
+              routerConfig: router.config(),
+            );
+          },
         ),
-        routerConfig: router.config(),
       ),
     );
   }
