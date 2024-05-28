@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:recipes/core/models/recipe-model/recipe_model.dart';
 import 'package:recipes/features/add-recipe/view/add_recipe.imports.dart';
 import 'package:recipes/features/bottom-tabs/bottom_tabs.imports.dart';
 import 'package:recipes/features/home/view/home.imports.dart';
 import 'package:recipes/features/my-recipes/view/my_recipes.imports.dart';
+import 'package:recipes/features/recipe-details/view/recipe_details.imports.dart';
 import 'package:recipes/features/search/view/search.imports.dart';
 import 'package:recipes/features/settings/settings_screen.imports.dart';
 
@@ -39,6 +42,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: AddRecipeRoute.page,
           path: '/add-recipe',
+        ),
+        AutoRoute(
+          page: RecipeDetailsRoute.page,
+          path: '/recipe-details:id',
         ),
       ];
 }

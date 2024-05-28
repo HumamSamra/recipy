@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
           context.read<HomeBloc>().add(const HomeEvent.started());
         },
         refreshController: refreshController,
+        margin: EdgeInsets.symmetric(vertical: 2.h),
         children: [
           Gap(2.h),
           const DefaultBanner(
@@ -39,21 +40,23 @@ class HomeScreen extends StatelessWidget {
           Builder(
             builder: (context) {
               if (state.requestState == RequestState.LOADED) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 1.w),
-                  child: Wrap(
-                    spacing: 2.w,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      for (final item in state.recipes)
-                        RecipeCard(
-                          title: item.meal!,
-                          subTitle: item.category!,
-                          imagePath: item.thumbUrl!,
-                          onTap: () {},
-                        ),
-                    ],
-                  ),
+                return Wrap(
+                  spacing: 3.w,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    for (final item in state.recipes)
+                      RecipeCard(
+                        heroTag: item.id!,
+                        title: item.meal!,
+                        subTitle: item.category!,
+                        imagePath: item.thumbUrl!,
+                        onTap: () {
+                          context.router.push(RecipeDetailsRoute(
+                            model: item,
+                          ));
+                        },
+                      ),
+                  ],
                 );
               } else if (state.requestState == RequestState.ERROR) {
                 return Center(

@@ -10,10 +10,12 @@ class RecipeCard extends StatelessWidget {
   final String subTitle;
   final Function()? onTap;
   final String? buttonLabel;
+  final String heroTag;
   const RecipeCard({
     required this.title,
     required this.subTitle,
     required this.imagePath,
+    required this.heroTag,
     this.onTap,
     this.buttonLabel,
     super.key,
@@ -21,59 +23,69 @@ class RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 1.h, bottom: 1.h),
-        margin: EdgeInsets.only(bottom: 2.h),
-        width: 47.w,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
-        ),
+    return Card(
+      margin: EdgeInsets.only(bottom: 1.h),
+      child: SizedBox(
+        width: 45.w,
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl: imagePath,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Gap(1.h),
-            SizedBox(
-              width: double.infinity,
-              child: AutoSizeText(
-                title,
-                minFontSize: 20,
-                textAlign: TextAlign.start,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+            Hero(
+              tag: heroTag,
+              child: GestureDetector(
+                onTap: onTap,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: imagePath,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ),
-            SizedBox(
-              width: double.infinity,
-              child: AutoSizeText(
-                subTitle,
-                minFontSize: 16,
-                maxFontSize: 18,
-                textAlign: TextAlign.start,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: AutoSizeText(
+                      title,
+                      minFontSize: 20,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: AutoSizeText(
+                      subTitle,
+                      minFontSize: 16,
+                      maxFontSize: 18,
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ],
               ),
             ),
             Gap(1.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: onTap,
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
-                  child: Text(buttonLabel ?? "View"),
-                )
-              ],
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: onTap,
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 0),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(10)),
+                    )),
+                child: Text(buttonLabel ?? "View"),
+              ),
             )
           ],
         ),

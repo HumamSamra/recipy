@@ -39,6 +39,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MyRecipesScreen(),
       );
     },
+    RecipeDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<RecipeDetailsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RecipeDetailsScreen(
+          key: args.key,
+          model: args.model,
+        ),
+      );
+    },
     SearchRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -108,6 +118,44 @@ class MyRecipesRoute extends PageRouteInfo<void> {
   static const String name = 'MyRecipesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RecipeDetailsScreen]
+class RecipeDetailsRoute extends PageRouteInfo<RecipeDetailsRouteArgs> {
+  RecipeDetailsRoute({
+    Key? key,
+    required RecipeModel model,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RecipeDetailsRoute.name,
+          args: RecipeDetailsRouteArgs(
+            key: key,
+            model: model,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RecipeDetailsRoute';
+
+  static const PageInfo<RecipeDetailsRouteArgs> page =
+      PageInfo<RecipeDetailsRouteArgs>(name);
+}
+
+class RecipeDetailsRouteArgs {
+  const RecipeDetailsRouteArgs({
+    this.key,
+    required this.model,
+  });
+
+  final Key? key;
+
+  final RecipeModel model;
+
+  @override
+  String toString() {
+    return 'RecipeDetailsRouteArgs{key: $key, model: $model}';
+  }
 }
 
 /// generated route for

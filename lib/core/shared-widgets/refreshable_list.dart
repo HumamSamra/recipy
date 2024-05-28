@@ -9,6 +9,7 @@ class RefreshableList extends StatelessWidget {
   final bool enableRefresh;
   final bool enableLoading;
   final RefreshController? refreshController;
+  final EdgeInsets margin;
   const RefreshableList({
     super.key,
     this.onRefhresh,
@@ -17,25 +18,29 @@ class RefreshableList extends StatelessWidget {
     this.enableLoading = true,
     this.enableRefresh = true,
     this.refreshController,
+    this.margin = EdgeInsets.zero,
   });
 
   @override
   Widget build(BuildContext context) {
     return DefaultScaffold(
-      child: SmartRefresher(
-        enablePullDown: enableRefresh,
-        enablePullUp: enableLoading,
-        header: const ClassicHeader(
-          refreshStyle: RefreshStyle.Behind,
-        ),
-        footer: const ClassicFooter(
-          loadStyle: LoadStyle.ShowWhenLoading,
-        ),
-        controller: refreshController ?? RefreshController(),
-        onRefresh: onRefhresh,
-        onLoading: onLoading,
-        child: ListView(
-          children: children,
+      child: Padding(
+        padding: margin,
+        child: SmartRefresher(
+          enablePullDown: enableRefresh,
+          enablePullUp: enableLoading,
+          header: const ClassicHeader(
+            refreshStyle: RefreshStyle.Behind,
+          ),
+          footer: const ClassicFooter(
+            loadStyle: LoadStyle.ShowWhenLoading,
+          ),
+          controller: refreshController ?? RefreshController(),
+          onRefresh: onRefhresh,
+          onLoading: onLoading,
+          child: ListView(
+            children: children,
+          ),
         ),
       ),
     );
