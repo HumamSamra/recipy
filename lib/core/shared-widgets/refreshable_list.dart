@@ -3,7 +3,7 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:recipes/core/shared-widgets/default_scaffold.dart';
 
 class RefreshableList extends StatelessWidget {
-  final Function()? onRefhresh;
+  final Function()? onRefresh;
   final Function()? onLoading;
   final List<Widget> children;
   final bool enableRefresh;
@@ -12,7 +12,7 @@ class RefreshableList extends StatelessWidget {
   final EdgeInsets margin;
   const RefreshableList({
     super.key,
-    this.onRefhresh,
+    this.onRefresh,
     this.onLoading,
     required this.children,
     this.enableLoading = true,
@@ -30,13 +30,13 @@ class RefreshableList extends StatelessWidget {
           enablePullDown: enableRefresh,
           enablePullUp: enableLoading,
           header: const ClassicHeader(
-            refreshStyle: RefreshStyle.Behind,
+            refreshStyle: RefreshStyle.Follow,
           ),
           footer: const ClassicFooter(
             loadStyle: LoadStyle.ShowWhenLoading,
           ),
           controller: refreshController ?? RefreshController(),
-          onRefresh: onRefhresh,
+          onRefresh: onRefresh,
           onLoading: onLoading,
           child: ListView(
             children: children,

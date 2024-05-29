@@ -6,10 +6,11 @@ import 'package:gap/gap.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:recipes/core/enums/request_state.dart';
 import 'package:recipes/core/router/router.dart';
-import 'package:recipes/core/shared-widgets/banners/default_banner.dart';
 import 'package:recipes/core/shared-widgets/banners/default_sub_banner.dart';
 import 'package:recipes/core/shared-widgets/cards/recipe_card.dart';
+import 'package:recipes/core/shared-widgets/default_scaffold.dart';
 import 'package:recipes/core/shared-widgets/refreshable_list.dart';
+import 'package:recipes/core/shared-widgets/shimmer_loading.dart';
 import 'package:recipes/features/home/view/bloc/home_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

@@ -53,7 +53,8 @@ dependencies:
   dartz: ^0.10.1
   dio: ^5.4.3+1
   youtube_player_flutter: ^8.1.2
-  flutter_sliding_up_panel: ^2.1.1
+  sliding_up_panel: ^2.0.0+1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

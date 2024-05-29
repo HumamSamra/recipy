@@ -5,6 +5,7 @@ import 'package:recipes/base-features/theme-bloc/theme_bloc.dart';
 import 'package:recipes/core/router/router.dart';
 import 'package:recipes/core/theme/app_theme.dart';
 import 'package:recipes/features/home/view/bloc/home_bloc.dart';
+import 'package:recipes/features/search/view/bloc/search_bloc.dart';
 import 'package:recipes/injection.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -37,6 +38,10 @@ class MainApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 getIt.get<HomeBloc>()..add(const HomeEvent.started()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                getIt.get<SearchBloc>()..add(const SearchEvent.started()),
           ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(

@@ -10,6 +10,9 @@ class RecipeDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final panelController = PanelController();
+    final scrollController = ScrollController();
+
     final controller = YoutubePlayerController(
         initialVideoId: YoutubePlayer.convertUrlToId(model.youtubeUrl!)!,
         flags: const YoutubePlayerFlags(
@@ -22,150 +25,128 @@ class RecipeDetailsScreen extends StatelessWidget {
         ),
         builder: (context, player) => Stack(
           children: [
-            Hero(
-              tag: model.id!,
-              child: CachedNetworkImage(
-                imageUrl: model.thumbUrl!,
-                fit: BoxFit.cover,
-                height: 40.h,
-                width: double.infinity,
+            Stack(
+              children: [
+                CachedNetworkImage(
+                  imageUrl: model.thumbUrl!,
+                  fit: BoxFit.cover,
+                  height: 40.h,
+                  width: double.infinity,
+                ),
+                Container(
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: const [
+                        .2,
+                        1,
+                      ],
+                          colors: [
+                        Colors.transparent,
+                        Colors.black.withOpacity(0.5),
+                      ])),
+                ),
+              ],
+            ),
+            SafeArea(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 3.h, horizontal: 4.w),
+                    child: Row(
+                      children: [
+                        SquaredButton.backButton(context),
+                        const Spacer(),
+                        SquaredButton(
+                          icon: Icons.share,
+                          onTap: () {},
+                        ),
+                        const Gap(10),
+                        SquaredButton(
+                          icon: Icons.save_outlined,
+                          onTap: () {},
+                        )
+                      ],
+                    )),
               ),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 4.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            SlidingUpPanel(
+              maxHeight: 100.h,
+              minHeight: 70.h,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(30)),
+              color: Theme.of(context).colorScheme.background,
+              controller: panelController,
+              panelSnapping: true,
+              snapPoint: 0.9,
+              panel: Column(
+                children: [
+                  const Gap(15.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Material(
+                      Container(
+                        width: 80.0,
+                        height: 6.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
                           color: Theme.of(context)
                               .colorScheme
-                              .background
-                              .withOpacity(.4),
-                          borderRadius: BorderRadius.circular(5),
-                          child: InkWell(
-                            onTap: () {
-                              context.router.maybePop();
-                            },
-                            borderRadius: BorderRadius.circular(5),
-                            child: Ink(
-                              padding: EdgeInsets.all(2.w),
-                              child: const Icon(
-                                Icons.arrow_back_ios_rounded,
-                                size: 28,
-                              ),
-                            ),
-                          )),
-                      Material(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .background
-                              .withOpacity(.4),
-                          borderRadius: BorderRadius.circular(5),
-                          child: InkWell(
-                            onTap: () {
-                              context.router.maybePop();
-                            },
-                            borderRadius: BorderRadius.circular(5),
-                            child: Ink(
-                              padding: EdgeInsets.all(2.w),
-                              child: const Icon(
-                                Icons.share,
-                                size: 28,
-                              ),
-                            ),
-                          )),
+                              .outline
+                              .withOpacity(.5),
+                        ),
+                      ),
                     ],
-                  )),
-            ),
-            SlidingUpPanelWidget(
-              panelController: SlidingUpPanelController(),
-              controlHeight: 70.h,
-              anchor: 0.4,
-              dragCancel: null,
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 9,
-                      spreadRadius: 6,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onBackground
-                          .withOpacity(0.2),
-                      offset: const Offset(0, -1),
-                    )
-                  ],
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Column(
-                  children: [
-                    const Gap(15.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  const Gap(15.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: AutoSizeText(
+                      model.meal!,
+                      minFontSize: 26,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: AutoSizeText(
+                      '${model.category!} | ${model.area!}',
+                      minFontSize: 20,
+                      style: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .outline
+                            .withOpacity(0.8),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Gap(1.h),
+                  player,
+                  Gap(1.h),
+                  Expanded(
+                    child: ListView(
+                      controller: scrollController,
                       children: [
-                        Container(
-                          width: 80.0,
-                          height: 6.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Theme.of(context)
-                                .colorScheme
-                                .outline
-                                .withOpacity(.5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: AutoSizeText(
+                            model.instructions!,
+                            minFontSize: 16,
+                            style: const TextStyle(
+                              height: 1.8,
+                            ),
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                       ],
                     ),
-                    const Gap(15.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: AutoSizeText(
-                        model.meal!,
-                        minFontSize: 26,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: AutoSizeText(
-                        '${model.category!} | ${model.area!}',
-                        minFontSize: 20,
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .outline
-                              .withOpacity(0.8),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Gap(1.h),
-                    player,
-                    Gap(1.h),
-                    Expanded(
-                      child: ListView(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: AutoSizeText(
-                              model.instructions!,
-                              minFontSize: 16,
-                              style: const TextStyle(
-                                height: 1.8,
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ),
-                          Gap(2.h)
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  Gap(2.h)
+                ],
               ),
             ),
           ],
